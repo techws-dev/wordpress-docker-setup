@@ -1,0 +1,33 @@
+version: '3.1'
+
+services:
+
+  wordpress:
+    image: wordpress
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: sensetmotifs
+      WORDPRESS_DB_PASSWORD: b3WEb@5*6mzSMb(P
+      WORDPRESS_DB_NAME: wp_sensetmotifs
+    volumes:
+      - ./site:/var/www/html
+
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: wp_sensetmotifs
+      MYSQL_USER: sensetmotifs
+      MYSQL_PASSWORD: b3WEb@5*6mzSMb(P
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    ports:
+      - ${MYSQL_PORT:-3306}:3306
+    volumes:
+      - db:/var/lib/mysql
+
+volumes:
+  wordpress:
+  db:
