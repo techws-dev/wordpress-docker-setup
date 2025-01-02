@@ -9,9 +9,9 @@ services:
       - 8080:80
     environment:
       WORDPRESS_DB_HOST: db
-      WORDPRESS_DB_USER: sensetmotifs
-      WORDPRESS_DB_PASSWORD: b3WEb@5*6mzSMb(P
-      WORDPRESS_DB_NAME: wp_sensetmotifs
+      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
+      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
+      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
     volumes:
       - ./site:/var/www/html
 
@@ -19,9 +19,9 @@ services:
     image: mysql:8.0
     restart: always
     environment:
-      MYSQL_DATABASE: wp_sensetmotifs
-      MYSQL_USER: sensetmotifs
-      MYSQL_PASSWORD: b3WEb@5*6mzSMb(P
+      MYSQL_DATABASE: ${WORDPRESS_DB_NAME}
+      MYSQL_USER: ${WORDPRESS_DB_USER}
+      MYSQL_PASSWORD: ${WORDPRESS_DB_PASSWORD}
       MYSQL_RANDOM_ROOT_PASSWORD: '1'
     ports:
       - ${MYSQL_PORT:-3306}:3306
